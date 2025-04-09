@@ -1,0 +1,63 @@
+<odoo>
+    <!-- Tree View Definition -->
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_of_birth"/>
+                <field name='gender'/>
+                <field name="doctor_id"/>
+                <field name="patient_type"/>
+                <field name="patient_image"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View Definition -->
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group style="width:300px" class="col-4">
+                            <field name="name" style='margin-bottom:1px'/>
+                            <field name='gender'/>
+                            <field name="patient_type"/>
+                            <field name="is_minor"/>
+                            <field name="guardian"/>
+                        </group>
+                        <group style="width:300px" class="col-4">
+                            <field name='age' readonly="1"/>
+                            <field name="date_of_birth" widget="date">
+                                <attribute name="options">
+                            {'max_date': (context_today() - timedelta(days=1)).strftime('%Y-%m-%d')}
+                                </attribute>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="patient_image" widget="image" style="width: 70px; height: 70px; border-radius: 50%;;"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Definition to show views -->
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Hospital Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" ref="view_hospital_patient_tree"/>
+    </record>
+
+  
+</odoo>

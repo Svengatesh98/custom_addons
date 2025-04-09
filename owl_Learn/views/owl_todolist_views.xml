@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- Tree View -->
+    <record id="owl_todo_tree_view" model="ir.ui.view">
+      <field name="name">owl.tree</field>
+      <field name="model">owl.todolist</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="color" widget="color"/>
+          <field name="completed"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="owl_todo_form_view" model="ir.ui.view">
+      <field name="name">owl.form</field>
+      <field name="model">owl.todolist</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="color" widget="color"/>
+              <field name="completed"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action for Standard Views -->
+    <record id="action_owl_todolist" model="ir.actions.act_window">
+      <field name="name">Owl Todo List</field>
+      <field name="res_model">owl.todolist</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- Client action that calls the registered OWL component -->
+    <record id="action_owl_todolist_js" model="ir.actions.client">
+      <field name="name">Owl Todo List</field>
+      <!-- This tag must exactly match the key used in JS registration -->
+      <!-- The registry.category("actions").add(...) key must match what you use in 
+      the action tag  -->
+      
+      <field name="tag">owl_Learn.action_todo_list_js</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem name="Owl Tutorial" id="menu_owl_tutorial" sequence="10"/>
+    <menuitem name="Todo List" id="menu_owl_todo_list" parent="menu_owl_tutorial" sequence="10" action="action_owl_todolist"/>
+    <menuitem name="Todo List owl" id="menu_owl_todo_list_owl" parent="menu_owl_tutorial" sequence="20" action="action_owl_todolist_js"/>
+  </data>
+</odoo>

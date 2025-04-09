@@ -1,0 +1,77 @@
+<odoo>
+    <!-- Prescription Tree View -->
+    <record id="view_hospital_prescription_tree" model="ir.ui.view">
+        <field name="name">hospital.prescription.tree</field>
+        <field name="model">hospital.prescription</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Prescription Form View -->
+    <record id="view_hospital_prescription_form" model="ir.ui.view">
+        <field name="name">hospital.prescription.form</field>
+        <field name="model">hospital.prescription</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string ="confirm"/>
+                    <field name="state" widget="statusbar" options="{'clickable': 1}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1" help="Click to see details" />
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="medication"/>
+                        </group>
+                        <group>
+                            <field name="dosage"/>
+                            <field name="instructions"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Prescription details" class="page_custom" style="background-color: #71639E;">
+                            <field name="medicine_line_ids">
+                                <tree editable="bottom" class="header_custom o_tree_view">
+                                    <field name="name" style="width:400px"/>
+                                    <field name="purpose"/>
+                                    <field name="dosagevalue"/>
+                                    <field name="route"/>
+                                    <field name="duration"/>
+                                    <!-- <field name="before_breakfast"/>
+                                    <field name="after_breakfast"/>
+                                    <field name="before_lunch"/>
+                                    <field name="after_lunch"/>
+                                    <field name="before_dinner"/>
+                                    <field name="after_dinner"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Details">
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to Open the Prescription Views -->
+    <record id="action_hospital_prescription" model="ir.actions.act_window">
+        <field name="name">Prescriptions</field>
+        <field name="res_model">hospital.prescription</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_hospital_prescription_tree"/>
+    </record>
+
+</odoo>

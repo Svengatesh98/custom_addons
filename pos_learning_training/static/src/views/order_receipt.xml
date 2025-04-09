@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.ReceiptHeader"  t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
+             <t t-log = "'Partnersss',props" />
+                      <t t-log="posName" />
+<!--             <t t-if="props.data.partner" >-->
+<!--               <div>Client:-->
+<!--               <t t-esc='props.data.partner.name'/></div>-->
+<!--           </t>-->
+        </xpath>
+<!--         <div class="shop-name" t-if="config">-->
+<!--                <h2>Shop: <span t-esc="config.name"/></h2>-->
+<!--            </div>-->
+ </t>
+<!--     <t t-name="receiptscreen" t-inherit="point_of_sale.ReceiptScreen"  t-inherit-mode="extension" owl="1">-->
+<!--         <xpath expr="//div[hasclass('screen-content')]/div[hasclass('default-view')]/div[hasclass('actions')]/div/h1" position="after">-->
+<!--             <span>TEST Ppayment </span>-->
+<!--             <t t-log = "'Order Lines',this" />-->
+<!--             <t t-log = "'Order Lines',this.currentOrder.orderlines" />-->
+
+<!--              <OrderWidget lines="this.currentOrder.orderlines" t-slot-scope="scope">-->
+<!--                <t t-set="line" t-value="scope.line"/>-->
+<!--                <Orderline line="line.getDisplayData()">-->
+<!--                </Orderline>-->
+<!--            </OrderWidget>-->
+
+<!--         </xpath>-->
+<!--     </t>-->
+
+        <!-- Define the BarcodeScannerWidget Template -->
+<!--          <t t-name="pos_learning.BarcodeScannerWidget" owl="1">-->
+<!--    <div>-->
+<!--        <h5 style="color: red;">Widget is being rendered!</h5>-->
+<!--        <button t-on-click="barcodeScan" class="btn btn-primary">-->
+<!--            Scan-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    </t>-->
+
+
+<!--        &lt;!&ndash; Extend the ProductsWidget to Include BarcodeScannerWidget &ndash;&gt;-->
+<!--        <t t-name="barcode_scanner_extension"-->
+<!--           t-inherit="point_of_sale.ProductsWidget"-->
+<!--           t-inherit-mode="extension"-->
+<!--           owl="1">-->
+<!--            <xpath expr="//div[hasclass('products-widget-control')]" position="before">-->
+<!--                &lt;!&ndash; Call the Barcode Scanner Widget &ndash;&gt;-->
+<!--                <t t-call="pos_learning.BarcodeScannerWidget" />-->
+<!--            </xpath>-->
+<!--        </t>-->
+
+<!--      <t t-name="barcode_scanner_extension" t-inherit="point_of_sale.DebugWidget" t-inherit-mode="extension" owl="1">-->
+
+
+
+<!--        &lt;!&ndash; Option A: Hide the "Orders" Section &ndash;&gt;-->
+<!--        <xpath expr="//div[hasclass('debug-orders')]" position="replace">-->
+<!--            &lt;!&ndash; This section will now be hidden &ndash;&gt;-->
+<!--        </xpath>-->
+<!--          -->
+<!--     </t>-->
+
+
+
+</templates>

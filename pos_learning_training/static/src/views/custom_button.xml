@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <!--<t t-name="pos_learning.CreateButton">-->
+   <!-- <button class="control-button btn btn-light rounded-0 fw-bolder"-->
+
+   <!--t-on-click="() => this.onClick()">-->
+
+   <!-- <i class="fa fa-pencil-square" role="img"-->
+
+   <!--aria-label="Custom Alert" title="Custom Alert"/>-->
+
+   <!--<span> </span>-->
+
+   <!--<span>Custom PopUp</span>-->
+
+   <!-- </button>-->
+   <!--    </t>-->
+   <t t-name="pos_button.PaymentScreenButtons" t-inherit="point_of_sale.PaymentScreenButtons" t-inherit-mode="extension">
+      <xpath expr="//div[hasclass('payment-buttons')]" position="inside">
+         <button class="button button-partial-payment btn btn-light py-3 text-start rounded-0 border-bottom" t-on-click="onClick">
+            <i class="fa fa-money me-2"/>
+               Custom Button
+         </button>
+      </xpath>
+   </t>
+</templates>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<template id="report_inventory_internal_layout">
+        <div class="article" t-att-data-oe-model="doc and doc._name" t-att-data-oe-id="doc and doc.id" t-att-data-oe-lang="doc and doc.env.context.get('lang')">
+          <t t-raw="0"/>
+        </div>
+    </template>
+    <template id="report_company_staff">
+        <t t-call="web.html_container">
+            <!-- <t t-call='web.external_layout'> -->
+                <t t-foreach="docs" t-as="doc">
+                  <t t-call="staff_creation.report_inventory_internal_layout" style="margin-top:0px;padding-top:0px;display:inline;">
+              
+                    <div class="page">
+                        <h2 t-esc="doc.name"/>
+                        <p>Company Number: <t t-esc="doc.number"/>
+                        </p>
+                        <p>Sequence: <t t-esc="doc.sequence"/>
+                        </p>
+                        <p>Company: <t t-esc="doc.company_id.name"/>
+                        </p>
+
+                        <h3>Staff Members</h3>
+                        
+                        <table class="table table-sm  table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>DOB</th>
+                                    <th>Department</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.staff_line_ids" t-as="staff">
+                                    <tr>
+                                        <td t-esc="staff.name"/>
+                                        <td t-esc="staff.age" style="text-align:right"/>
+                                        <td t-esc="staff.dob" style="text-align:right"/>
+                                        <td t-esc="staff.department"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

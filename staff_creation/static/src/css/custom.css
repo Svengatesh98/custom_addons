@@ -1,0 +1,6 @@
+.custom-text {
+    color: green !important;
+    font-weight: bold;
+    font-weight: 600;
+    background-color: color(from color srgb r g b);
+}

@@ -1,0 +1,82 @@
+ /* .o_form_label {
+    font-size: 14px ;
+    color:black;
+    text-transform: "";
+    background-color: #71639E;
+    border: 5px solid #71639E;
+    padding-left: 10px;
+    padding-bottom: -10px;
+    width:150px;
+    border-radius: 10px;
+   
+    margin-bottom: 1px;
+}
+.o_inner_group.grid {
+    display: grid;
+    row-gap: 1px; 
+}
+
+.o_cell {
+    display: flex;
+    align-items: center;
+    gap: 1px; 
+}
+.o_field_widget {
+    margin-bottom: -1px !important;
+}  */
+/* .header_custom page tree{
+    background-color: #ac99d6 !important;
+}
+
+.header_custom table thead>tr>th:nth-child(2){
+    background-color: #ac99d6 !important;
+} */
+
+/* Example CSS targeting tree view */
+/* 
+.header_custom .o_list_view .o_data_row {
+    background-color: #71639E;
+    border: 1px solid #ccc; 
+}
+
+.header_custom .o_list_view th {
+    background-color: #71639E; 
+    color: white; 
+}
+
+.header_custom .o_list_view td {
+    font-size: 12px; 
+    padding: 10px; 
+    border: 2px solid #71639E  
+}
+
+
+.header_custom .o_list_view .o_data_row.editable {
+    background-color: #fff;
+}
+
+.header_custom {
+    font-weight: bold;         
+    font-size: 12px;            
+    color: #ffffff;           
+   
+   
+    padding: 5px 5px;       
+     
+}
+.page_custom {
+    background-color: #71639E !important; 
+    color: white;    
+    font-weight: bold;              
+    padding: 10px;   
+    font-size: 12px;                 
+}
+
+.o_tree_view th,
+.o_tree_view td {
+    table-layout: fixed;         
+    padding: 10px;               
+    overflow: hidden;             
+}
+
+ */

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="om_hospital.report_inventory_internal_layout">
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+    </template>
+
+    <template id="report_om_hospital_prescription">
+        <t t-call="web.html_container">
+            <!-- <t t-call='web.external_layout'> -->
+            <t t-call="om_hospital.report_inventory_internal_layout" style="margin-top:0px;padding-top:0px;display:inline;">
+                <div class=''>
+                    <t t-foreach="docs" t-as="o">
+                        <!-- <t t-if="o and 'company_id' in o">
+                            <t t-set="company" t-value="o.company_id"></t>
+                        </t>
+                        <t t-if="not o or not 'company_id' in o">
+                            <t t-set="company" t-value="res_company"></t>
+                        </t> -->
+                        <div class="header">
+                            <div class="row  mt32 mb32">
+                                <div class="col-5" style="font:16px lucida-console,sans-serif !important;">
+                                    <span>
+                                        <strong>Patient Name:</strong>
+                                        <t t-esc="o.patient_id.name"/>
+                                    </span>
+                                    <br/>
+                                    <span>
+                                        <strong>DOB:</strong>
+                                        <!-- <t t-esc="format_date(o.patient_id.date_of_birth, 'dd-MM-yyyy')"/>
+                                    <t t-set="format_date" t-value="o.format_date"/>
+                                    <t t-esc="o.patient_id.date_of_birth and format_date(o.patient_id.date_of_birth, 'dd-MM-yyyy') or 'N/A'"/> -->
+
+                                        <!-- <t t-esc="record.date_field.strftime('%d-%m-%Y')"/>-->
+
+                                        <t t-esc="o.patient_id.date_of_birth.strftime('%d-%m-%Y')"/>
+                                    </span>
+                                    <br/>
+                                    <span>
+                                        <strong>Gender:</strong>
+                                        <t t-esc="o.patient_id.gender"/>
+                                    </span>
+                                    <br/>
+                                    <span>
+                                        <strong>Doctor Name:</strong>
+                                        <t t-esc="o.doctor_id.name"/>
+                                    </span>
+                                    <br/>
+                                    <span>
+                                        <strong>Date:</strong>
+                                        <t t-esc="o.date"/>
+                                    </span>
+                                    <br/>
+                                    <span>
+                                        <h6 t-esc="o.name"/>
+                                    </span>
+
+
+
+                                    <!-- <span t-esc="res_company.partner_id.name"/>
+                                    <br/>
+                                    <span t-esc="res_company.partner_id.street"/>
+                                    <br/>
+                                    <span t-esc="res_company.partner_id.street2"/>
+                                    <br/>
+                                    <span t-esc="res_company.partner_id.city"/>
+                                    <br/>
+                                    <span t-esc="res_company.partner_id.country_id.name"/>
+                                    <br/>
+                                    <span t-esc="res_company.partner_id.vat"/> -->
+                                    <!-- <h6 t-esc="o.name"/> -->
+                                    <!-- <div style="font-size: 16px; color: #333; font-family: Arial, sans-serif; margin-bottom: ;">
+                                    <strong>Patient Name:</strong>
+                                    <t t-esc="o.patient_id.name"/>
+                                </div>
+                                <div style="font-size: 16px; color: #333; font-family: Arial, sans-serif; margin-bottom: ;">
+                                    <strong>otor Name:</strong>
+                                    <t t-esc="o.doctor_id.name"/>
+                                </div>
+                                <div style="font-size: 16px; color: #333; font-family: Arial, sans-serif; margin-bottom: ;">
+                                    <strong>Date:</strong>
+                                    <t t-esc="o.date"/>
+                                </div> -->
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="text-center">prescription</h2>
+                                </div>
+                                <div class="col-2 text-right " style="vertical-align:text-top">
+                                    <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 100px; min-height:100px; min-width: 100px; max-width: 100px;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="page col-6 pt-10 mt-10">
+                        <h6 t-esc="o.name"/>
+                        <div style="font-size: 16px; color: #333; font-family: Arial, sans-serif; margin-bottom: ;">
+                            <strong>Patient Name:</strong>
+                            <t t-esc="o.patient_id.name"/>
+                        </div>
+                        <div style="font-size: 16px; color: #333; font-family: Arial, sans-serif; margin-bottom: ;">
+                            <strong>otor Name:</strong>
+                            <t t-esc="o.doctor_id.name"/>
+                        </div>
+                        <div style="font-size: 16px; color: #333; font-family: Arial, sans-serif; margin-bottom: ;">
+                            <strong>Date:</strong>
+                            <t t-esc="o.date"/>
+                        </div>
+                    </div> -->
+                        <h6>List of Prescribed Medications</h6>
+
+                        <table class="table table-sm  table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th>Medication Name</th>
+                                    <th>purpose</th>
+                                    <th>Dosage</th>
+                                    <th>Route</th>
+                                    <th>Frequency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.medicine_line_ids" t-as="medicine">
+                                    <tr>
+                                        <td t-esc="medicine.name.name"/>
+                                        <!-- <td t-esc="medicine._fields['purpose'].selection[medicine.purpose]"/> -->
+                                        <td t-esc="dict(medicine.fields_get(allfields=['purpose'])['purpose']['selection']).get(medicine.purpose)"/>
+                                        <td t-esc="medicine.dosagevalue"/>
+                                        <td t-esc="medicine.route"/>
+                                        <td t-esc="medicine.duration"/>
+                                        <!-- <td t-esc="staff.age" style="text-align:right"/>
+                                        <td t-esc="staff.dob" style="text-align:right"/>
+                                        <td t-esc="staff.department"/> -->
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+    <!-- <template id="report_company_staff">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="om_hospital.landed_cost_attar_report_pdf" t-lang="user.partner_id.lang"/>
+                </t>
+            </t> -->
+    <!-- </template> -->
+</odoo>

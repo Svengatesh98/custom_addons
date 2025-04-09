@@ -1,0 +1,87 @@
+/* Swipe Container */
+.swipe-container {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px auto;
+    width: 300px;
+    text-align: center;
+    background-color: #f8f9fa;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Swipe States */
+.swipe-container.starred {
+    background-color: #fff3cd;
+    border-color: #ffcd39;
+}
+
+.swipe-container.deleted {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.swipe-container.dropped {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+/* Badges */
+.badge {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+/* Draggable Item */
+.swipe-item {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.swipe-item:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+/* Drop Zone */
+.drop-zone {
+    border: 2px dashed #007bff;
+    padding: 20px;
+    text-align: center;
+    background: #e9ecef;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.drop-zone:hover {
+    background: #cce5ff;
+}
+
+/* Dragging Feedback */
+.dragging {
+    opacity: 0.6;
+}

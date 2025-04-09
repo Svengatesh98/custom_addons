@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id,perm_read,perm_write,perm_create,perm_unlink
+access_swipe_record,access_swipe_record,model_swipe_record,,1,1,1,1
+

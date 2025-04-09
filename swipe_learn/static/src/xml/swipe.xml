@@ -1,0 +1,32 @@
+<templates xml:space="preserve">
+    <t t-name="swipe_learn.SwipeAction">
+        <div class="swipe-container"
+            t-on-swipeleft="onSwipeLeft"
+            t-on-swiperight="onSwipeRight"
+            t-on-dragover="onDragOver"
+            t-on-drop="onDrop"
+            t-class="state.swiped">
+
+            <t t-if="state.swiped == 'starred'">
+                <span class="badge badge-warning">⭐ Starred</span>
+            </t>
+            <t t-if="state.swiped == 'deleted'">
+                <span class="badge badge-danger">🗑 Deleted</span>
+            </t>
+            <t t-if="state.swiped == 'dropped'">
+                <span class="badge badge-info">📌 Dropped</span>
+            </t>
+
+            <div class="swipe-item"
+                draggable="true"
+                t-on-dragstart="onDragStart"
+                t-on-dragend="onDragEnd">
+                <t t-esc="props.text"/>
+            </div>
+
+            <div class="drop-zone">
+                Drop Here
+            </div>
+        </div>
+    </t>
+</templates>

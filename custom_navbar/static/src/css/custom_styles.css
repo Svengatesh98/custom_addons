@@ -1,0 +1,25 @@
+/* .o_sidebar {
+    background-color: #123456 !important; 
+    width: 250px !important;            
+}
+
+.o_menu_sections .o_menu_section {
+    font-size: 16px !important;           
+    color: #ffffff !important;           
+} */
+/* Custom Sidebar Styles */
+.custom_sidebar {
+    background-color: #333333 !important;   /* Change background */
+    width: 250px !important;                 /* Change the width */
+    color: #fff !important;                  /* Text color */
+}
+
+/* Hover effect for menu items */
+.o_menu_sections .o_menu_section:hover {
+    background-color: #971717 !important;
+}
+
+/* Active menu item */
+.o_menu_sections .o_menu_section.active {
+    background-color: #555555 !important;
+}

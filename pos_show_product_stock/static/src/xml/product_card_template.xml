@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <templates id="template" xml:space="preserve">
+        <t t-name="point_of_sale.ProductCard" t-inherit-mode="extension" t-inherit="point_of_sale.ProductCard" owl="1">
+            <xpath expr="//div[contains(@class, 'product-price')]" position="after">
+                <div class="product-qty">
+                    <strong>Available Qty:</strong>
+                    <span class="value">
+                        <t t-esc="props.product.qty_available"/>
+                    </span>
+                </div>
+            </xpath>
+        </t>
+    </templates>
+</odoo>

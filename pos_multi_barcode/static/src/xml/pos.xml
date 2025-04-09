@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="assets" inherit_id="point_of_sale.assets">
+    <xpath expr="." position="inside">
+        <script type="module" src="/pos_multi_barcode/static/src/js/barcodesearch.js"/>
+    </xpath>
+</template>

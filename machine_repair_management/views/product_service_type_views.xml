@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_move_form_prodcut_service_type" model="ir.ui.view">
+        <field name="name">prodcut_service_type_form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='parent_id']" position="after">
+
+                <field name="def_servicetypeid" class="oe_inline"/>
+                <label for="warranty_period">Warranty Period</label>
+                <div class="o_lead_opportunity_form_inline_fields">
+                    <field name="warranty_period" nolabel="1"  style='text-align:right;width:50px;'/>
+                    <field name="warranty_period_combo" nolabel="1" class="oe_inline align-top"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+<!-- <group invisible="type == 'lead'">
+<field name="user_id" context="{'default_sales_team_id': team_id}" widget="many2one_avatar_user"/>
+<label for="date_deadline">Expected Closing</label>
+<div class="o_lead_opportunity_form_inline_fields">
+<field name="date_deadline" nolabel="1" class="oe_inline"/>
+<field name="priority" widget="priority" nolabel="1" class="oe_inline align-top"/>
+</div>
+<field -->

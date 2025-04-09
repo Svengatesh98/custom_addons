@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_easy_order_client" model="ir.actions.client">
+            <field name="name">Easy Order</field>
+            <field name="tag">easyorder.basecomponent</field>
+            <field name="target">main</field>
+        </record>
+
+        <menuitem id="menu_easy_order_root" name="Easy Order"/>
+        <menuitem id="menu_easy_order" name="Easy Order" parent="menu_easy_order_root" action="action_easy_order_client" sequence="11"/>
+    
+    </data>
+</odoo>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sales_contract_and_recurring_invoices.report_inventory_internal_layout">
+        <div class="article" t-att-data-oe-model="doc and doc._name" t-att-data-oe-id="doc and doc.id" t-att-data-oe-lang="doc and doc.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+    </template>
+
+    <template id="report_subscription_contracts">
+        <t t-call="web.html_container">
+            <t t-call="sales_contract_and_recurring_invoices.report_inventory_internal_layout" style="margin-top:0px;padding-top:0px;display:inline;">
+
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="res_company" t-value="doc.company_id"/>
+                    <div class="header" style="height: 150px; background-color: rgba(255,0,0,0.1);border: 1px solid black;">
+                        <div class="row">
+                            <div class="col-5" >
+                            <!-- style="font-size:16px lucida-console,sans-serif !important;" -->
+                                <span t-esc="res_company.partner_id.name"/>
+                                <br/>
+                                <span t-esc="res_company.partner_id.street"/>
+                                <br/>
+                                <span t-esc="res_company.partner_id.street2"/>
+                                <br/>
+                                <span t-esc="res_company.partner_id.city"/>
+                                <br/>
+                                <span t-esc="res_company.partner_id.country_id.name"/>
+                                <br/>
+                                <span t-esc="res_company.partner_id.vat"/>
+                            </div>
+                            <div class="col-5">
+                                <h2 class="text-left">Prescription</h2>
+                            </div>
+                            <div class="col-2 text-right">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 100px; min-height:100px; min-width: 100px; max-width: 100px;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <br/>
+                    <br/> -->
+                    <div class="page">
+                        <!-- <h5>
+                            <t t-esc='doc.name'/>
+                        </h5> -->
+                        <style>
+                            table, th, td ,tr{
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                                text-align: left;
+                                }
+                              th {
+                                    background-color: #b5cfa3; /* Dark gray background */
+                                    color: black; /* White text */
+                                    font-weight: 700;
+                                    font-size:20px;
+                                    text-transform:capitalize; /* Uppercase header 
+                                    text-align: left;
+                                    border: 1px solid #454d55; /* Slightly lighter border */
+                                    
+                                }
+                        </style>
+                        <table class="table table-sm">
+                            <tr>
+                                <th class='col-2'>Customer:</th>
+                                <td class='col-4'>
+                                    <t t-if="doc.partner_id.name">
+                                        <t t-esc="doc.partner_id.name"/>
+                                    </t>
+                                </td>
+                                <th class='col-2'>Reference:</th>
+                                <td class='col-4'>
+                                    <t t-if="doc.reference">
+                                        <t t-esc="doc.reference"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Recurring Period:</th>
+                                <td>
+                                    <t t-if="doc.recurring_period">
+                                        <t t-esc="doc.recurring_period"/>
+                                        <t t-esc="doc.recurring_period_interval"/>
+                                    </t>
+                                </td>
+                                <th>Company:</th>
+                                <td>
+                                    <t t-if="doc.company_id">
+                                        <t t-esc="doc.company_id.name"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Start Date:</th>
+                                <td>
+                                    <t t-if="doc.date_start">
+                                        <t t-esc="doc.date_start.strftime('%d-%m-%Y')"/>
+                                    </t>
+                                </td>
+                                <th>End Date:</th>
+                                <td>
+                                    <t t-if="doc.date_end">
+                                        <t t-esc="doc.date_end.strftime('%d-%m-%Y')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Stage:</th>
+                                <td>
+                                    <t t-if="doc.state">
+                                        <t t-esc="doc.state"/>
+                                    </t>
+                                </td>
+                                <th>Date of Next Invoice:</th>
+                                <td>
+                                    <t t-if="doc.next_invoice_date">
+                                        <t t-esc="doc.next_invoice_date.strftime('%d-%m-%Y')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+
+
+                        <table class="table table-sm">
+                            <thead t-set-header="true">
+                                <tr>
+                                    <th colspan="6" style="padding: 5px; text-align: left;">
+                                Contract Details
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <h5>
+                                        <th scope="col">Product</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Description</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Ordered Qty</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Unit Price</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Discount (%)</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Subtotal</th>
+                                    </h5>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.contract_line_ids" t-as='res'>
+                                    <tr>
+                                        <td>
+                                            <t t-esc="res.product_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="res.description"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="res.qty_ordered"/>
+                                            <t t-esc='res.product_uom_id.name'/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="res.price_unit" t-options="{'widget': 'monetary', 'display_currency': res.currency_id}" style="text-align:right"/>
+                                        </td>
+                                        <td style="text-align:right">
+                                            <t t-if="res.discount">
+                                                <t t-esc="res.discount" />
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right">
+                                            <t t-esc="res.sub_total" t-options="{'widget': 'monetary', 'display_currency': res.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <t t-if="doc.amount_total">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; font-weight: bold;">Total</td>
+                                    <td style="text-align:right">
+                                        <t t-esc="doc.amount_total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <h5>Sale ORder Lines</h5>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th colspan="6" style="padding: 5px; text-align: left;">
+                                Contract Details
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <h5>
+                                        <th scope="col">Product</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Description</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Ordered Qty</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Unit Price</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Discount (%)</th>
+                                    </h5>
+                                    <h5>
+                                        <th scope="col">Subtotal</th>
+                                    </h5>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.sale_order_line_ids" t-as='rec'>
+                                    <tr>
+                                        <td>
+                                            <t t-esc="rec.product_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec.product_uom_qty"/>
+                                            <t t-esc='rec.product_uom.name'/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec.price_unit" t-options="{'widget': 'monetary', 'display_currency': rec.currency_id}"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="rec.discount">
+                                                <t t-esc="rec.discount"/>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rec.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': rec.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+              
+
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

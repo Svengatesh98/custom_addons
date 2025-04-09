@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="views_pos_learning_tree" model="ir.ui.view">
+            <field name="name">views.pos.learning.tree</field>
+            <field name="model">pos.learning</field>
+            <field name="arch" type="xml">
+                <tree default_order="name Desc">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="Number"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="views_pos_learning_form" model="ir.ui.view">
+            <field name="name">views.pos.learning.form</field>
+            <field name="model">pos.learning</field>
+            <field name="arch" type="xml">
+                 <form>
+                     <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="Number"/>
+                            </group>
+                        </group>
+                     </sheet>
+                 </form>
+            </field>
+        </record>
+
+        <record id="action_pos_learning" model="ir.actions.act_window">
+            <field name="name">Pos Learning</field>
+            <field name="res_model">pos.learning</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem action="action_pos_learning" id="menu_pos_learning" name="Pos Learning" parent="point_of_sale.menu_point_root" sequence="0"/>
+
+    </data>
+</odoo>

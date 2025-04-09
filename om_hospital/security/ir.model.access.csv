@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hospital_patient,hospital_patient,om_hospital.model_hospital_patient,base.group_user,1,1,1,1
+access_hospital_doctor,hospital_doctor,om_hospital.model_hospital_doctor,base.group_user,1,1,1,1
+access_hospital_prescription,access_hospital_prescription,model_hospital_prescription,base.group_user,1,1,1,1
+access_medicine,access_medicine,model_medicine,base.group_user,1,1,1,1
+access_medicine_management,access_medicine_management,model_medicine_management,base.group_user,1,1,1,1
+access_hospital_appointment,access_hospital_appointment,model_hospital_appointment,base.group_user,1,1,1,1
+access_patient_tag,access_patient_tag,model_patient_tag,base.group_user,1,1,1,1
+access_report_prescription,access_report_prescription,model_report_prescription,base.group_user,1,1,1,1

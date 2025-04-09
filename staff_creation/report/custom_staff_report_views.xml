@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="action_report_company_staff" model="ir.actions.report">
+                <field name="name">Print Staff Report</field>
+                <field name="model">custom.company.staff</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="report_name">staff_creation.report_company_staff</field>
+                <field name="report_file">staff_creation.report_company_staff</field>
+                <field name="binding_model_id" ref="model_custom_company_staff"/>
+                <field name="binding_type">report</field>
+        </record>
+        <record id="action_report_company_excel_staff" model="ir.actions.report">
+                <field name="name">staff Excel Report</field>
+                <field name="model">custom.company.staff</field>
+                <field name="report_type">xlsx</field>
+                <field name="report_name">custom_staff_report.custom_staff_excel_report</field>
+                <field name="report_file">custom_staff_report.custom_staff_excel_report</field>
+                <field name="binding_model_id" ref="model_custom_company_staff"/>
+                <field name="binding_type">report</field>
+        </record>
+
+</odoo>

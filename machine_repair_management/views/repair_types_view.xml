@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="repair_type_form_view">
+            <field name="name">Repair Type form</field>
+            <field name="model">repair.type</field>
+            <field name="arch" type="xml">
+                <form> 
+                    <sheet>
+                        <group>
+                            <group colspan="2">
+                           		 <field name="code"/>
+                            </group>
+                            <group colspan="2">
+                            	<field name="name"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="service_id" />
+                            </group>
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="repair_type_tree_view">
+            <field name="name">Repair type tree</field>
+            <field name="model">repair.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                 	<field name="code"/>
+                     <field name="name"/>
+                     <field name="service_id"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_repair_type" model="ir.actions.act_window">
+            <field name="name">Services</field>
+            <field name="res_model">repair.type</field>
+<!--            <field name="view_type">form</field>odoo13-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>

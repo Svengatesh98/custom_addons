@@ -1,0 +1,10 @@
+<!-- static/src/xml/pos_sample.xml -->
+<templates id="template" xml:space="preserve">
+    <t t-name="CustomButton">
+        <div class="control-button">
+            <button class="button" t-on-click="onClick">
+                Sample Button
+            </button>
+        </div>
+    </t>
+</templates>

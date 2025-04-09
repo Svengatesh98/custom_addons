@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<template id="template_project" xml:space="preserve">
+    <t t-name="ProjectDashBoardMain">
+        <div class="o_control_panel">
+            <div class="container-fluid">
+                <div class="row mt-5">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="row">
+                            <div id="total_projects_main" class="col-sm-12 col-md-4" t-on-click="_onClickProjects">
+                                <div class="product_box" style="height:180px">
+                                    <div class="row">
+                                        <div class="col-md-12 mt-5">
+                                            <img src="project_dashboard/static/src/images/search-img.png" style="width:50px; height:50px" alt="search"/>
+                                        </div>
+                                        <i class="fa-solid fa-magnifying-glass-location"></i>
+                                        <div class="col-md-12 mt-3">
+                                            <span class="project_count" id="total_projects">
+                                                <t t-esc="this.project_state.projects_count"/>
+                                            </span>
+                                            <br/>
+                                            <span class="project_box_title">Projects</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <button t-on-click="toggleChart" class="btn btn-primary">
+                            <t t-esc="chart_state.chartTypes[chart_state.currentChartIndex + 1] || chart_state.chartTypes[0]"/>
+                        </button>
+
+
+                        <!-- <button t-on-click="toggleChart" class="btn btn-primary">
+                                 Toggle Chart Type
+                        </button> -->
+                        <div id="total_projects_per_hours" class="col-sm-12 col-md-6">
+                            <div class="projects_hour_pie_div half_chart chart-container card-shadow">
+                                <h2>Project by hours </h2>
+                                <hr/>
+                                <div class="graph_canvas">
+                                    <canvas class="project_hours" width="300" height="300"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </t>
+</template>

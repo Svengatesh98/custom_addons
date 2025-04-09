@@ -1,0 +1,13 @@
+<!-- views/pos_order_views.xml -->
+<odoo>
+    <record id="view_pos_order_form_inherit" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_form"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="after">
+                <field name="custom_field"/>
+            </field>
+        </field>
+    </record>
+</odoo>

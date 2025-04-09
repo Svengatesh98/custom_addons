@@ -1,0 +1,20 @@
+<odoo>
+    <!-- Define the QWeb Report Template -->
+    <template id="easyorder.easyorder_product_shopping_cart_report">
+        <div class="report-container">
+            <h2>Shopping Cart Report</h2>
+            <ul class="list-group">
+                <t t-foreach="doc.product_details" t-as="product">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i><t t-esc="product.name"/></i> x
+                        <t t-esc="product.quantity"/>
+                        <br/>
+                        <span class="badge text-bg-success rounded-pill fs-3">
+                            <t t-esc="product.price_subtotal"/>
+                        </span>
+                    </li>
+                </t>
+            </ul>
+        </div>
+    </template>
+</odoo>

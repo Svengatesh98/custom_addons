@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding='utf-8'?>
+<template xml:space='preserve'>
+    <t t-name="easyorder.EasyOrder" owl="1">
+        <body class='o_web_client'>
+            <!-- <h2>Welcome to Easy Order!</h2> -->
+            <div class='row'>
+                <div class='col-md-6 all-products' >
+                    <div class="input-group mb-10 " style='max-width: 600px;height: 42px;padding-left:40%;margin-top:10px;gap:2;'>
+                        <input type="text" class='form-control' placeholder='Search' aria-label='Search' t-ref='search-input' t-on-keyup="searchProducts" />
+                    </div>
+
+                    <div class='row row-col-1 row-cols-md-3 row-cols-lg-5 g-1' style="display: flex;
+                                            flex-wrap: wrap;
+                                            height: 500px;
+                                            margin-right:10px;
+                                            padding-left:10px;
+                                            margin-top:15px;
+                                            overflow-y: scroll">
+                        <t t-if='state.products.length>0'>
+                            <t t-foreach="state.products" t-as="product" t-key="product.id">
+                                <div class="grid-container" style=" display: flex;flex-wrap: wrap;justify-content: space-around;gap:;">
+                                    <EasyOrderProducts product='product' addToCard.bind="addToCard" removeFromCard.bind="removeFromCard"/>
+                                </div>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <p>No products found.</p>
+                        </t>
+                        <!-- <t t-call="easyorder.EasyOrderProducts"/> -->
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+                    <p>Shopping card</p>
+                    <t t-foreach="state.shoppingCart" t-as="product" t-key="product.id">
+                        <EasyOrderProductsShoppingCart product='product'/>
+                    </t>
+                    <!-- <span>
+                        <b>Amount Total:<t t-esc="state.amount_total"/>
+                        </b>
+                    </span> -->
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="text-align: left; width:300px;font-weight:400;">
+                                   Amount Total: 
+                                </td >
+                                <td style="text-align: right; width:100px"> 
+                                    <t t-esc="state.amount_total.toFixed(2)"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3">
+                    <h5>Actions</h5>
+                </div>
+
+
+            </div>
+
+        </body>
+    </t>
+</template>

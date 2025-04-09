@@ -1,0 +1,44 @@
+<odoo>
+    <!-- Define Action First -->
+    <record id="action_swipe_record" model="ir.actions.act_window">
+        <field name="name">Swipe Records</field>
+        <field name="res_model">swipe.record</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Define Views -->
+    <record id="view_swipe_record_tree" model="ir.ui.view">
+        <field name="name">swipe.record.tree</field>
+        <field name="model">swipe.record</field>
+        <field name="arch" type="xml">
+            <tree string="Swipe Records">
+                <field name="name"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_swipe_record_form" model="ir.ui.view">
+        <field name="name">swipe.record.form</field>
+        <field name="model">swipe.record</field>
+        <field name="arch" type="xml">
+            <form string="Swipe Record">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_swipe_record" model="ir.actions.act_window">
+        <field name="name">Swipe Records</field>
+        <field name="res_model">swipe.record</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Define Menus -->
+    <menuitem id="swipe_menu" name="Swipe Records" sequence="10"/>
+    <menuitem id="swipe_submenu" name="Manage Records" parent="swipe_menu" action="action_swipe_record"/>
+</odoo>

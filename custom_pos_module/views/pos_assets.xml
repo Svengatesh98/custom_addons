@@ -1,0 +1,8 @@
+<odoo>
+    <template id="assets_frontend" name="POS Assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <script type="module" src="/my_custom_pos_module/static/src/js/custom_button.js"></script>
+            <script type="module" src="/my_custom_pos_module/static/src/js/custom_pos_screen.js"></script>
+        </xpath>
+    </template>
+</odoo>

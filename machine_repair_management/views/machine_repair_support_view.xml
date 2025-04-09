@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="machine_repair_support_form_view" model="ir.ui.view">
+            <field name="name">Machine Repair form</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" options="{'clickable': '1', 'fold_field': 'fold'}" widget="statusbar"/>
+                        <!--                            <button name="action_create_invoice" string="Create Invoice" groups="machine_repair_management.group_machine_repair_manager" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=','closed')]}"/-->
+                        <!--                            <button name="action_create_task" string="Create Task" groups="machine_repair_management.group_machine_repair_manager" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=','closed')]}"/-->
+                        <button class="oe_highlight" groups="machine_repair_management.group_machine_repair_manager" invisible="is_close == True" name="set_to_close" string="Set To Close" type="object"/>
+                        <button class="oe_highlight" groups="machine_repair_management.group_machine_repair_manager" invisible="is_close == False" name="set_to_reopen" string="Re Open" type="object"/>
+                        <button class="oe_highlight" groups="machine_repair_management.group_machine_repair_user" invisible="is_close == True" name="create_machine_diagnosys" string="Create Machine Diagnosys" type="object"/>
+                        <button class="oe_highlight" groups="machine_repair_management.group_machine_repair_manager" invisible="is_close == True" name="create_work_order" string="Create Work Order" type="object"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-pencil-square" name="show_machine_diagnosys_task" string="Machine Diagnosys" type="object"/>
+                            <button class="oe_stat_button" icon="fa-pencil-square" name="show_work_order_task" string="Machine Work Orders" type="object"/>
+                        </div>
+                        <div class="oe_title">
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" readonly="1"/>
+                                    <br/>
+                                    <field name="subject" placeholder="Machine Repair Support Subject" readonly="state == 'closed'"/>
+                                    <field invisible="1" name="is_task_created"/>
+                                </h1>
+                            </div>
+                        </div>
+                        <group string="Header - Default">
+
+                            <group>
+                                <field name="department_id" readonly="state == 'closed'" options = "{'no_create_edit':True,'no_create':True}"/>
+                            </group>
+                            <group>
+                                <field name="location_id" readonly="state == 'closed'" options = "{'no_create_edit':True,'no_create':True}"/>
+                            
+                            </group>
+
+                        </group>
+                        <group>
+                            <group colspan="2">
+                                <field name="phone" readonly="state == 'closed'" string="Mobile Number" force_save="1"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="partner_id" readonly="state == 'closed'" string="Customer Name"/>
+                            </group>
+                            <group>
+                                <field name="email" readonly="state == 'closed'"/>
+                            </group>
+                            <group>
+                                <field name="request_date" readonly="state == 'closed'" string="Repair Request Date"/>
+                            </group>
+                            <group>
+                                <field name="priority" readonly="state == 'closed'"/>
+                            </group>
+                        </group>
+
+                        <!--   <group string="Header - Default">
+                            <group>
+                            	<field name="department_id" readonly="state == 'closed'"/>
+                            	<field name="phone" readonly="state == 'closed'" string="Mobile Number"/>
+                            	 <field name="partner_id" readonly="state == 'closed'" string="Customer Name"/>
+                                <field name="request_date" readonly="state == 'closed'" string="Repair Request Date"/>
+                               
+                            </group>
+                            <group>
+                            
+                               <field name="email" readonly="state == 'closed'"/>
+                               <field name="priority" readonly="state == 'closed'"/>
+                            </group>
+                             <group colspan="2">
+						        <field name="phone" readonly="state == 'closed'" string="Mobile Number" force_save="1"/>
+						    </group>
+                        </group> -->
+
+                        <group>
+
+                            <group string="Maintenance">
+                                <field name="project_id" readonly="state == 'closed'"/>
+                            </group>
+
+                        </group>
+
+
+                        <group >
+                            <!--  <group string="Machine Information"> -->
+                            <group string="Product Information">
+                                <field name="product_category" readonly="state == 'closed'" />
+                                <!-- <field name="product_category" readonly="state == 'closed'" string="Machine Category"/> -->
+                                <field name="product_id" readonly="state == 'closed'"/>
+                                <field name="brand" readonly="state == 'closed'"/>
+                                <field name="model" readonly="state == 'closed'"/>
+                                <field name="color" readonly="state == 'closed'"/>
+                                <field name="year" readonly="state == 'closed'"/>
+                                <field name="product_slno" readonly="state == 'closed'"/>
+
+                            </group>
+                            <group string="Purchase Information">
+                                <field name="purchase_invoice_no" readonly="state == 'closed'"/>
+                                <field name="purchase_date" readonly="state == 'closed'"/>
+                                <field name="purchase_dealer_name" readonly="state == 'closed'"/>
+                                <field name="warranty" readonly="state == 'closed'"/>
+                                <field name="website_year" readonly="state == 'closed'" string="Warranty Expiry Date"/>
+                                <!-- <field name="website_year" readonly="state == 'closed'" string="Machine Manufacturing Year"/> -->
+                            </group>
+                            <!-- <group>
+                                <field name="warranty" readonly="state == 'closed'"/>
+                                <field name="accompanying_items" readonly="state == 'closed'"/>
+                                <field name="website_brand" readonly="state == 'closed'" string="Machine Brand"/>
+                                <field name="website_model" readonly="state == 'closed'" string="Machine Model"/>
+                                <field name="website_year" readonly="state == 'closed'" string="Machine Manufacturing Year"/>
+                            </group> -->
+                        </group>
+                        <!--  <group string="Purchase Information">
+                            <group>
+                                <field name="purchase_invoice_no" readonly="state == 'closed'"/>
+                                <field name="purchase_date" readonly="state == 'closed'"/>
+                                <field name="purchase_dealer_name" readonly="state == 'closed'"/>
+                            </group>
+                        </group> -->
+                        <group invisible="1">
+                            <field invisible="1" name="custome_client_user_id"/>
+                            <field name="accompanying_items" readonly="state == 'closed'"/>
+                            <field name="website_brand" readonly="state == 'closed'" string="Machine Brand"/>
+                            <field name="website_model" readonly="state == 'closed'" string="Machine Model"/>
+                            <field name="team_id" readonly="state == 'closed'"/>
+                            <field name="analytic_account_id" readonly="state == 'closed'"/>
+                            <field invisible="1" name="custome_client_user_id"/>
+                            <field groups="base.group_multi_company" name="company_id"/>
+                            <field name="is_close" readonly="state == 'closed'" string="Repaired?"/>
+                            <field name="close_date" readonly="state == 'closed'"/>
+                            <field name="total_spend_hours" readonly="state == 'closed'" string="Repairing Duration" widget="float_time"/>
+                            <field name="user_id" readonly="state == 'closed'"/>
+                            <field name="lot_id" readonly="state == 'closed'"/>
+                            <field name="team_id" readonly="state == 'closed'"/>
+                            <field name="damage" readonly="state == 'closed'"/>
+                        </group>
+
+                        <notebook>
+
+                            <page string="CALL INFORMATION">
+                                <!-- <page string="General Information"> -->
+                                <group>
+                                    <group>
+                                        <!--                                    <field name="journal_id" attrs="{'readonly': ['|' ,('state', '=', 'closed')]}"/>-->
+                                        <!--                                    <field name="task_id"/>-->
+                                        <field name="nature_of_service_id" readonly="state == 'closed'" string="Service Types"/>
+                                        <field name="repair_types_ids" widget="many2many_tags" string="Services"/>
+                                    </group>
+                                    <group>
+                                        <field name="problem" readonly="state == 'closed'" string="Complaint Details"/>
+                                    </group>
+
+                                </group>
+                            </page>
+
+                            <page string="TECHNICIAN ALLOCATION">
+                                <!-- <page string="General Information"> -->
+                                <group>
+                                    <group>
+                                        <field name="team_leader_id" readonly="state == 'closed'"/>
+
+                                    </group>
+                                    <group>
+                                        <field name="user_id" readonly="state == 'closed'"/>
+
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="MACHINE IMAGES">
+                                <group>
+                                    <group>
+                                        <field class="oe_avatar" name="img1" string="Image 1" widget="image"/>
+                                        <field class="oe_avatar" name="img3" string="Image 3" widget="image"/>
+                                        <field class="oe_avatar" name="img5" string="Image 5" widget="image"/>
+                                    </group>
+                                    <group>
+                                        <field class="oe_avatar" name="img2" string="Image 2" widget="image"/>
+                                        <field class="oe_avatar" name="img4" string="Image 4" widget="image"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page groups="base.group_user" string="TIMESHEETS">
+                                <field name="timesheet_line_ids" nolabel="1" readonly="state == 'closed'">
+                                    <tree editable="bottom">
+                                        <field name="date"/>
+                                        <field name="user_id"/>
+                                        <field invisible="1" name="repair_request_id"/>
+                                        <field name="project_id"/>
+                                        <field name="account_id"/>
+                                        <field name="name"/>
+                                        <field invisible="1" name="billable"/>
+                                        <field name="unit_amount" string="Hours" sum="Hours" widget="float_time"/>
+                                        <field invisible="1" name="company_id"/>
+                                        <!--odoo13-->
+                                        <!--                                    <field invisible="1" name="user_id" required="1"/-->
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="PRODUCT CONSUME PART">
+                                <field name="cosume_part_ids" nolabel="1" readonly="state == 'closed'">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="qty"/>
+                                        <field name="product_uom"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+
+                            <page string="CUSTOMER RATING">
+                                <group>
+                                    <group>
+                                        <field name="rating" widget="radio"/>
+                                        <field name="comment"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                        </notebook>
+                        <field name="description" placeholder="Add an internal note..." readonly="state == 'closed'"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field groups="base.group_user" name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="machine_repair_support_tree_view" model="ir.ui.view">
+            <field name="name">Machine Repair tree</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string='CIC Ref No'/>
+                    <!-- <field name='cic_ref_no' string='CIC Ref No'/> -->
+                    <field name="request_created_date"/>
+                    <field name="request_created_time"/>
+                    <field name="partner_id" string="Contact Name"/>
+                    <field name="phone" string="Mobile No"/>
+                    <field name='district' string="District"/>
+                    <field name='location_id' string="City" />
+                    <field name="appt_created_date"/>
+                    <field name="appt_created_time"/>
+                    <field name='product_category'/>
+                    <field name="model"/>
+                    <field name="user_id"/>
+                    <field name='problem'/>
+                    <field name="state" string="Status"/>
+                    <field name="work_order_no"/>
+
+                    <!-- <field name="email"/> -->
+                    <!-- <field name="subject"/> -->
+                    <!-- <field name="category"/> -->
+                    <!-- <field name="priority"/> -->
+                    <!-- <field groups="base.group_multi_company" name="company_id"/> -->
+                </tree>
+            </field>
+        </record>
+        <record id="machine_repair_support_search_view" model="ir.ui.view">
+            <field name="name">Machine Repair search</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="subject"/>
+                    <field name="partner_id"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="category"/>
+                    <field name="priority"/>
+                    <group expand="0" string="Group By">
+                        <filter context="{'group_by':'user_id'}" name="grp_user" string="Assigned To"/>
+                        <filter context="{'group_by':'partner_id'}" name="grp_partner" string="Customer"/>
+                        <filter context="{'group_by':'company_id'}" name="grp_company" string="Company"/>
+                        <filter context="{'group_by':'category'}" name="grp_category" string="Category"/>
+                        <filter context="{'group_by':'name'}" name="grp_name" string="Ticket"/>
+                        <filter context="{'group_by':'subject'}" name="grp_subject" string="Subject"/>
+                        <filter context="{'group_by':'team_id'}" name="grp_team" string="Machine Repair Team"/>
+                        <filter context="{'group_by':'team_leader_id'}" name="grp_team_leader" string="Team Leader"/>
+                        <filter context="{'group_by':'state'}" name="grp_state" string="State"/>
+                        <filter context="{'group_by':'request_date'}" name="grp_request_date" string="Create Date"/>
+                        <filter context="{'group_by':'close_date'}" name="grp_close_date" string="Close Date"/>
+                        <filter context="{'group_by':'priority'}" name="grp_priority" string="Priority"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="machine_repair_view_kanban" model="ir.ui.view">
+            <field name="name">helpesk kanban</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="subject"/>
+                    <field name="partner_id"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="category"/>
+                    <field name="priority"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_tags_section">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_tags_section">
+                                    <field name="subject"/>
+                                </div>
+                                <div class="o_kanban_tags_section">
+                                    <field name="user_id"/>
+                                </div>
+                                <div class="o_kanban_tags_section">
+                                    <field name="request_date"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <field name="state"/>
+                                        :
+                                        <field name="priority"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="view_machine_repair_pivot" model="ir.ui.view">
+            <field name="name">machine.repair.support.pivot</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <pivot string="Project Tasks">
+                    <field name="name" type="row"/>
+                    <field name="state" type="col"/>
+                </pivot>
+            </field>
+        </record>
+        <record id="view_machine_repair_graph" model="ir.ui.view">
+            <field name="name">machine.repair.support.graph</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <graph string="Project Tasks">
+                    <field name="name"/>
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        <record id="machine_repair_calendar" model="ir.ui.view">
+            <field name="name">Machine Repair Calendar</field>
+            <field name="model">machine.repair.support</field>
+            <field name="arch" type="xml">
+                <calendar color="journal_id" date_start="request_date" string="Machine Repair">
+                    <field name="partner_id"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="action_machine_repair_support" model="ir.actions.act_window">
+            <field name="name">Machine Repair</field>
+            <field name="res_model">machine.repair.support</field>
+            <!--            <field name="view_type">form</field> odoo13-->
+            <field name="view_mode">tree,form,kanban,calendar,pivot,graph,activity</field>
+            <field name="help">Machine Repair Support Tree.</field>
+        </record>
+    </data>
+</odoo>

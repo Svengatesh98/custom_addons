@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Menu Item to show action -->
+    <menuitem id="menu_hospital_root" name="Hospital Management" action="action_hospital_patient"/>
+    <menuitem id="menu_hospital_patient" name="Front Desk" parent="menu_hospital_root"/> 
+    <menuitem id="menu_hospital_Patients" name="Patient" parent="menu_hospital_patient" action="om_hospital.action_hospital_patient"/>
+    <menuitem id="menu_hospital_medicine" name="Medicine" parent="menu_hospital_patient" action="action_medicine"/>
+    <menuitem id="menu_hospital_doctor" name="Doctors" parent="menu_hospital_patient" action="action_hospital_doctor" sequence="1"/>
+    <menuitem id="menu_hospital_appointment" name="Appointments" parent="menu_hospital_patient" action="action_hospital_appointment"/>
+    <menuitem id="menu_hospital_prescription" name="Prescriptions" parent="menu_hospital_patient" action="action_hospital_prescription"/>
+    <menuitem id="menu_hospital_tag" name="Tag" parent="menu_hospital_patient" action="action_hospital_patient_tag"/>
+    <menuitem id="menu_hospital_Billing" name="Billing" parent="menu_hospital_root"/>
+    <menuitem id="menu_hospital_Billing_invoices" name="Invoices" parent="menu_hospital_Billing" action="account.action_move_out_invoice_type"/>
+    <menuitem id="menu_hospital_Billing_payments" name="Payments" parent="menu_hospital_Billing" action="account.action_account_payments"/>
+
+</odoo>

@@ -1,0 +1,9 @@
+<t t-name="PointOfSale.CustomerListScreen" owl="1">
+    <xpath expr="//div[@class='customer-line']" position="inside">
+        <span class="pos_res_partner">
+            <t t-if="customer.pos_res_partner_id">
+                Default Customer: <t t-esc="customer.pos_res_partner_id.name"/>
+            </t>
+        </span>
+    </xpath>
+</t>
