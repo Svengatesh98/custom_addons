@@ -1,0 +1,14 @@
+<odoo>
+    <record id="pos_order_search_status" model="ir.ui.view">
+        <field name="name">pos.order.status</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='posted']" position='after'>
+                <separator/>
+                <filter string="Dine In" name="dine_in" domain="[('dine_in', '=', True)]"/>
+                <filter string="Take Away" name="takeaway" domain="[('takeaway', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

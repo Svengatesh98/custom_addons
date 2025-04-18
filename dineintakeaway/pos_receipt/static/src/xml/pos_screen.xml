@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--To add the customer details in the settings page-->
+<templates id="template" xml:space="preserve">
+	<t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[contains(@class, 'pos-receipt')]" position="replace">
+			<div class="pos-receipt">
+				<div>
+					<img t-attf-src="/web/image?model=res.company&amp;id={{props.data.headerData.company.id}}&amp;field=logo" alt="Logo" class="pos-receipt-logo"/>
+				</div>
+
+
+				<div>
+					<img t-if="props.data.qr_code" id="qrcode" t-att-src="props.data.qr_code" class="pos-receipt-qrcode"/>
+				</div>
+				<div style="text-align:center">
+					<t t-esc="props.data.headerData.company.name"/>
+				</div>
+				<div style="text-align:center">
+					<t t-esc="props.data.headerData.company.street"/>
+				</div>
+				<div style="text-align:center">
+					<t t-esc="props.data.headerData.company.city"/>
+				</div>
+				<div style="text-align:center">
+					<t t-esc="props.data.headerData.company.state"/>
+				</div>
+				<!--  			    <t t-log="posName" />-->
+				<div style="text-align:center">
+					<strong>
+						<t t-esc="posName" />
+					</strong>
+					<strong>
+						<t t-esc="posPhone" />
+					</strong>
+				</div>
+
+
+				<!--  <div style="text-align:center">Tel: <t t-esc="props.data.headerData.company.phone"/></div>-->
+				<!-- <div style="text-align:center">Email: <t t-esc="props.data.headerData.company.email"/></div>-->
+
+				<div style="text-align:center">
+					<strong>SIMPLIFIED TAX INVOICE </strong>
+				</div>
+				<div style="text-align:center">
+					<strong>فاتورة ضريبية مبسطة </strong>
+				</div>
+
+				<!-- <div style="text-align:center">
+					<strong>
+						<div>raja</div>
+					</strong>
+				</div> -->
+				<!-- <t t-if="true">
+					<div> DEBUG LINE</div>
+				</t> -->
+				<div style="text-align:center;">
+					<t t-if="props.data.dine_in">
+						<div>----------------------------------------</div>
+						<div class="highlight" style="font-weight: bold;">Dine in</div>
+						<div>----------------------------------------</div>
+					</t>
+					<t t-if="props.data.takeaway">
+						<div>----------------------------------------</div>
+						<div class="highlight" style="font-weight: bold;">Takeaway Order</div>
+						<div>----------------------------------------</div>
+					</t>
+				</div>
+
+
+
+				<!-- <t t-if="order.dine_in">
+					<div>Dine-In: Yes</div>
+				</t>
+				<t t-else="">
+					<div>Dine-In: No</div>
+				</t> -->
+
+				<!-- <t t-if="order?.dine_in">
+					<div>Dine In</div>
+				</t>
+				<t t-if="order.takeaway">
+					<div style="text-align:center">
+					takeaway
+					</div>
+				</t> -->
+				<!-- <div class="pos-receipt-order-type">
+					<t t-if="props.order?.dine_in">
+						<div>Dine In</div>
+					</t>
+					<t t-if="props.order?.takeaway">
+						<div>Take Away</div>
+					</t>
+				</div> -->
+
+				<!-- <t t-if="order.takeaway">
+					<div>Take Away</div>
+				</t> -->
+
+				<!-- <t t-if="receipt.dine_in">
+				
+					<div>
+						<span style="font-weight:bold;font-size: 13px;">
+                            Dine In
+						</span>
+					</div>
+				</t> -->
+
+
+
+
+
+
+
+				<table class="table-bordered">
+					<colgroup>
+						<col width='35%'/>
+						<col width='65%'/>
+					</colgroup>
+					<tr style="border-bottom: 1px solid #e6e6e6">
+						<td>Invoice No:<br/>
+ رقم الفاتورة </td>
+						<td>
+							<span t-esc="props.data.name"/>
+						</td>
+
+					</tr>
+
+					<tr style="border-bottom: 1px solid #e6e6e6">
+						<td>Issue Date:<br/>
+تاريخ الإصدار </td>
+						<td>
+							<span t-esc="props.data.date"/>
+						</td>
+					</tr>
+					<tr t-if="props.data.headerData.company.vat" style="border-bottom: 0px solid #cccccc;">
+						<td>VAT No:<br/>
+الرقم الضريبي </td>
+
+						<td>
+							<t t-esc="props.data.headerData.company.vat"/>
+						</td>
+					</tr>
+					<tr t-if="props.data.cashier" style="border-bottom: 0px solid #cccccc;">
+						<td>Cashier:<br/>
+ أمين الصندوق</td>
+
+						<td>
+							<t t-esc="props.data.cashier"/>
+						</td>
+					</tr>
+
+				</table>
+				<table class="table table-sm table-bordered">
+					<thead>
+						<tr>
+							<!-- <th >Item<br/>الصنف</th> -->
+							<th>Qty<br/>
+الكمية</th>
+
+							<th >Price<br/>
+سعر</th>
+
+							<th>Disc(%)<br/>
+تخفيض</th>
+
+							<th>Subtotal<br/>
+السعر بالضريبة</th>
+
+						</tr>
+					</thead>
+					<t t-foreach="props.data.orderlines" t-as="line" t-key="line_index">
+						<tr>
+
+							<td colspan="4">
+								<t t-esc="line.productName"/>
+							</td>
+						</tr>
+						<tr>
+
+							<td >
+								<t t-esc="line.qty"/>
+							</td>
+							<td >
+								<t t-esc="line.unitPrice"/>
+							</td>
+							<td style="text-align:center;">
+								<t t-esc="line.discount"/>
+							</td>
+							<td>
+								<t t-esc="line.price"/>
+							</td>
+						</tr>
+					</t>
+
+					<br/>
+					<br/>
+
+				</table>
+				<table >
+					<tr>
+						<td style="font-weight:bold; padding-inline-end: 20px; text-align: start;">TOTAL/المجموع</td>
+						<td style="font-weight:bold; ">
+							<t t-esc="props.formatCurrency(props.data.amount_total)"/>
+						</td>
+					</tr>
+				</table>
+
+				<!-- <table>
+				
+				<t t-if="props.data.rounding_applied">
+			        <tr>
+			            <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			                Rounding
+			            </td>
+			            <td colspan="2" style="font-weight:bold; text-align: end;">
+			                <t t-esc="props.formatCurrency(props.data.rounding_applied)"/>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			                To Pay
+			            </td>
+			            <td colspan="2" style="font-weight:bold; text-align: end;">
+			                <t t-esc="props.formatCurrency(props.data.amount_total + props.data.rounding_applied)"/>
+			            </td>
+			        </tr>
+			    </t>
+			    
+			</table>		 -->
+
+
+				<!--   <tr>
+			        <td colspan="4" style="font-weight: bold;">Payment Lines</td>
+			    </tr> -->
+
+				<table >
+
+					<t t-foreach="props.data.paymentlines" t-as="line" t-key="line_index">
+						<tr>
+							<td >
+								<t t-esc="line.name"/>
+							</td>
+							<td >
+								<t t-esc="props.formatCurrency(line.amount, false)"/>
+							</td>
+						</tr>
+					</t>
+
+					<tr>
+						<td style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			            CHANGE/المتبقي
+						</td>
+						<td style="font-weight:bold;">
+							<t t-esc="props.formatCurrency(props.data.change)"/>
+						</td>
+					</tr>
+
+
+
+				</table>
+
+
+				<!--   <t t-if="props.data.total_discount">
+			        <tr>
+			            <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			                Discounts
+			            </td>
+			            <td colspan="2" style="font-weight:bold; text-align: end;">
+			                <t t-esc="props.formatCurrency(props.data.total_discount)"/>
+			            </td>
+			        </tr>
+			    </t> -->
+
+				<table >
+					<t t-if="props.data.tax_details.length > 0">
+
+						<tr style="border-bottom: 1px solid black;">
+							<td style="font-weight:bold; text-align:center; padding: 5px; ">Tax / الضريبة</td>
+							<td style="font-weight:bold; text-align:center; padding: 5px; ">Amount / المبلغ</td>
+							<td style="font-weight:bold; text-align:center; padding: 5px;">Base / الأساس</td>
+							<td style="font-weight:bold; text-align:center; padding: 5px; ">Total / الإجمالي</td>
+						</tr>
+
+						<t t-foreach="props.data.tax_details" t-as="tax" t-key="tax.tax.id">
+							<tr style="border-bottom: 1px solid lightgray;">
+								<td style="text-align:center; padding: 5px; ">
+									<t t-if="tax.tax.amount_type != 'fixed'">
+										<t t-esc="tax.tax.amount"/>
+%
+									</t>
+									<t t-else="" t-esc="tax.tax.name"/>
+								</td>
+								<td style="text-align:center; padding: 5px; ">
+									<t t-esc="props.formatCurrency(tax.amount, false)"/>
+								</td>
+								<td style="text-align:center; padding: 5px; ">
+									<t t-esc="props.formatCurrency(tax.base, false)"/>
+								</td>
+								<td style="text-align:center; padding: 5px; ">
+									<t t-esc="props.formatCurrency(tax.amount + tax.base, false)"/>
+								</td>
+							</tr>
+						</t>
+
+						<!-- <t t-if="props.data.tax_details.length > 1">
+			            <tr>
+			                <td></td>
+			                <td></td>
+			                <td style="font-weight:bold; text-align: end;">
+			                    <t t-esc="props.formatCurrency(props.data.amount_tax, false)"/>
+			                </td>
+			                <td style="font-weight:bold; text-align: end;">
+			                    <t t-esc="props.formatCurrency(props.data.total_without_tax, false)"/>
+			                </td>
+			                <td style="font-weight:bold; text-align: end;">
+			                    <t t-esc="props.formatCurrency(props.data.amount_total, false)"/>
+			                </td>
+			            </tr>
+			        </t> -->
+					</t>
+
+				</table>
+
+
+				<!--  <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th >Item<br/>الصنف</th>
+                        <th>Qty<br/>الكمية</th>
+                        <th >Price<br/>سعر</th>
+                        <th>Disc(%)<br/>تخفيض</th>
+                        <th>Subtotal<br/>السعر بالضريبة</th>
+                    </tr>
+                </thead>
+                <t t-foreach="props.data.orderlines" t-as="line" t-key="line.productName + '-' + line.qty">
+                        <tr>
+                        
+                        	<td colspan="4"><t t-esc="line.productName"/></td>
+                        </tr>
+                        <tr>
+                            
+                            <td ><t t-esc="line.qty"/></td>
+                            <td ><t t-esc="line.unitPrice"/></td>
+                            <td style="text-align:center;"><t t-esc="line.discount"/></td>
+                            <td><t t-esc="line.price"/></td>
+                        </tr>
+                    </t>
+                  
+                  <br/> 
+                  <br/> 
+               	<tr>
+				    <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">TOTAL/المجموع</td>
+				    <td colspan="2" style="font-weight:bold; text-align: end;">
+				        <t t-esc="props.formatCurrency(props.data.amount_total)"/>
+				    </td>
+				</tr>
+				
+				<t t-if="props.data.rounding_applied">
+			        <tr>
+			            <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			                Rounding
+			            </td>
+			            <td colspan="2" style="font-weight:bold; text-align: end;">
+			                <t t-esc="props.formatCurrency(props.data.rounding_applied)"/>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			                To Pay
+			            </td>
+			            <td colspan="2" style="font-weight:bold; text-align: end;">
+			                <t t-esc="props.formatCurrency(props.data.amount_total + props.data.rounding_applied)"/>
+			            </td>
+			        </tr>
+			    </t>
+			
+			    <tr>
+			        <td colspan="4" style="font-weight: bold;">Payment Lines</td>
+			    </tr>
+			
+			    <t t-foreach="props.data.paymentlines" t-as="line" t-key="line_index">
+			        <tr>
+			            <td colspan="2">
+			                <t t-esc="line.name"/>
+			            </td>
+			            <td colspan="2" style="text-align: end;">
+			                <t t-esc="props.formatCurrency(line.amount, false)"/>
+			            </td>
+			        </tr>
+			    </t>
+			
+			    <tr>
+			        <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			            CHANGE/المتبقي
+			        </td>
+			        <td colspan="2" style="font-weight:bold; text-align: end;">
+			            <t t-esc="props.formatCurrency(props.data.change)"/>
+			        </td>
+			    </tr>
+			
+			    <t t-if="props.data.total_discount">
+			        <tr>
+			            <td colspan="2" style="font-weight:bold; padding-inline-end: 20px; text-align: start;">
+			                Discounts
+			            </td>
+			            <td colspan="2" style="font-weight:bold; text-align: end;">
+			                <t t-esc="props.formatCurrency(props.data.total_discount)"/>
+			            </td>
+			        </tr>
+			    </t>
+				
+				
+			 <t t-if="props.data.tax_details.length > 0">
+				  
+				    <tr style="border-bottom: 1px solid black;">
+				        <td style="font-weight:bold; text-align:center; padding: 5px; ">Tax / الضريبة</td>
+				        <td style="font-weight:bold; text-align:center; padding: 5px; ">Amount / المبلغ</td>
+				        <td style="font-weight:bold; text-align:center; padding: 5px;">Base / الأساس</td>
+				        <td style="font-weight:bold; text-align:center; padding: 5px; ">Total / الإجمالي</td>
+				    </tr>
+				
+				    <t t-foreach="props.data.tax_details" t-as="tax" t-key="tax.tax.id">
+				        <tr style="border-bottom: 1px solid lightgray;">
+				            <td style="text-align:center; padding: 5px; ">
+				                <t t-if="tax.tax.amount_type != 'fixed'">
+				                    <t t-esc="tax.tax.amount"/>%
+				                </t>
+				                <t t-else="" t-esc="tax.tax.name"/>
+				            </td>
+				            <td style="text-align:center; padding: 5px; ">
+				                <t t-esc="props.formatCurrency(tax.amount, false)"/>
+				            </td>
+				            <td style="text-align:center; padding: 5px; ">
+				                <t t-esc="props.formatCurrency(tax.base, false)"/>
+				            </td>
+				            <td style="text-align:center; padding: 5px; ">
+				                <t t-esc="props.formatCurrency(tax.amount + tax.base, false)"/>
+				            </td>
+				        </tr>
+				    </t>
+							 
+			        <t t-if="props.data.tax_details.length > 1">
+			            <tr>
+			                <td></td>
+			                <td></td>
+			                <td style="font-weight:bold; text-align: end;">
+			                    <t t-esc="props.formatCurrency(props.data.amount_tax, false)"/>
+			                </td>
+			                <td style="font-weight:bold; text-align: end;">
+			                    <t t-esc="props.formatCurrency(props.data.total_without_tax, false)"/>
+			                </td>
+			                <td style="font-weight:bold; text-align: end;">
+			                    <t t-esc="props.formatCurrency(props.data.amount_total, false)"/>
+			                </td>
+			            </tr>
+			        </t>
+			    </t>
+            </table> -->
+
+
+
+				<br/>
+				<!--    <div>
+             <div class="pos-receipt-amount">
+                TOTAL/المجموع
+                <span t-esc="props.formatCurrency(props.data.amount_total)" class="pos-receipt-right-align"/>
+            </div>
+            <t t-if="props.data.rounding_applied">
+                <div class="pos-receipt-amount">
+                  Rounding
+                <span t-esc='props.formatCurrency(props.data.rounding_applied)' class="pos-receipt-right-align"/>
+                </div>
+                <div class="pos-receipt-amount">
+                  To Pay
+                 <span t-esc='props.formatCurrency(props.data.amount_total + props.data.rounding_applied)' class="pos-receipt-right-align"/>
+              </div>
+            </t>
+            <br/><br/>
+
+            Payment Lines
+
+            <div class="paymentlines" t-foreach="props.data.paymentlines" t-as="line" t-key="line_index">
+                <t t-esc="line.name" />
+                <span t-esc="props.formatCurrency(line.amount, false)" class="pos-receipt-right-align"/>
+            </div>
+
+            <div>
+                CHANGE/المتبقي
+                <span t-esc="props.formatCurrency(props.data.change)" class="pos-receipt-right-align"/>
+            </div>
+
+            Extra Payment Info
+
+            <t t-if="props.data.total_discount">
+                <div>
+                    Discounts
+                    <span t-esc="props.formatCurrency(props.data.total_discount)" class="pos-receipt-right-align"/>
+                </div>
+            </t>
+            <div t-if="props.data.tax_details.length > 0" class="pos-receipt-taxes">
+                <span />
+                <span>Tax</span>
+                <span>Amount</span>
+                <span>Base</span>
+                <span>Total</span>
+                <t t-foreach="props.data.tax_details" t-as="tax" t-key="tax.tax.id">
+                    <span t-esc="tax.tax.letter || ''"/>
+                    <span t-if="tax.tax.amount_type != 'fixed'"><t t-esc="tax.tax.amount"/>%</span>
+                    <span t-else="" t-esc="tax.tax.name"/>
+                    <span t-esc="props.formatCurrency(tax.amount, false)" />
+                    <span t-esc="props.formatCurrency(tax.base, false)" />
+                    <span t-esc="props.formatCurrency(tax.amount + tax.base, false)" />
+                </t>
+                <t t-if="props.data.tax_details.length > 1">
+                    <span />
+                    <span />
+                    <span t-esc="props.formatCurrency(props.data.amount_tax, false)" />
+                    <span t-esc="props.formatCurrency(props.data.total_without_tax, false)" />
+                    <span t-esc="props.formatCurrency(props.data.amount_total, false)" />
+                </t>
+            </div> -->
+				<div class="before-footer" />
+				<div t-if="props.data.pos_qr_code">
+					<!--  <br /><br /> -->
+					<div class="pos-receipt-order-data mb-2">
+                    Scan me to request an invoice for your purchase.
+					</div>
+					<img id="posqrcode" t-att-src="props.data.pos_qr_code" class="pos-receipt-qrcode"/>
+				</div>
+
+				<div t-if="props.data.ticket_code">
+					<!--   <br /><br /> -->
+					<div class="pos-receipt-order-data">
+                    You can go to <t t-out="props.data.base_url"/>
+/pos/ticket and use the code below to request an invoice online
+					</div>
+					<div class="pos-receipt-order-data">
+                    Unique Code: <t t-out="props.data.ticket_code"/>
+					</div>
+				</div>
+				<!-- Footer -->
+				<div t-if="props.data.footer" class="pos-receipt-center-align" style="white-space:pre-line">
+					<!-- <br/> -->
+					<t t-esc="props.data.footer" />
+					<!-- <br/>
+                <br/> -->
+				</div>
+
+				<div class="after-footer">
+					<t t-foreach="props.data.paymentlines" t-as="line" t-key="line_index">
+						<t t-if="line.ticket">
+							<!-- <br /> -->
+							<div class="pos-payment-terminal-receipt">
+								<pre t-esc="line.ticket" />
+							</div>
+						</t>
+					</t>
+				</div>
+				<!-- <br/> -->
+				<t t-if="props.data.shippingDate">
+					<div class="pos-receipt-order-data">
+                    Expected delivery:
+						<div>
+							<t t-esc="props.data.shippingDate" />
+						</div>
+					</div>
+				</t>
+				<div class="pos-receipt-order-data">
+					<p>Welcome, Come Again
+						<br/>
+            	مرحبًا، تعال مرة أخرى </p>
+				</div>
+				<div class="pos-receipt-order-data">
+					<p>Exchange or return of the goods sold should be within 72 Hour
+						<br/>
+            	استبدال أو ارجاع البضاعة المباعة يتم خلال 72 ساعة من تاريخ الشراء </p>
+				</div>
+
+			</div>
+		</xpath>
+	</t>
+</templates>     

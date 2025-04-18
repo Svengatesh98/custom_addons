@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="cd_dinetakeaway.DineInButton" owl="1">
+        <button class="control-button btn btn-primary rounded-0 fw-bolder" t-on-click="() => this.click_check_dine()">
+            <i class="fa fa-building me-2"/>
+            <span>Dine-in</span>
+        </button>
+    </t>
+
+    <t t-name="cd_dinetakeaway.TakeAwayButton" owl="1">
+        <button class="control-button btn  btn-primary rounded-0 fw-bolder" t-on-click="(ev) => this.click_check_takeaway()">
+            <i class="fa fa-car me-2" />
+            <span>Takeaway</span>
+        </button>
+    </t>
+</templates>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
